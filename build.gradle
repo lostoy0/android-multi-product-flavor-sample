@@ -7,6 +7,10 @@
 // if productFlavor is not always exists,
 // we should measure if exists by `project.hasProperty("buildProduct")`
 
+gradle.beforeProject { project ->
+    println("============== beforeProject ==============")
+}
+
 if (project.hasProperty("buildProduct")) {
     println("=============== buildProduct = " + buildProduct)
 }
