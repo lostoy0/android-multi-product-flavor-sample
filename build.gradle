@@ -1,16 +1,42 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+// buildProduct input from command line
+// we execute `./gradlew assembleDebug -PbuildProduct=global`,
+// then we can use buildProduct in gradle script
+// we can use buildProduct directly or get value by this `project.getProperty("buildProduct")`
+// if productFlavor is not always exists,
+// we should measure if exists by `project.hasProperty("buildProduct")`
+
+if (project.hasProperty("buildProduct")) {
+    println("=============== buildProduct = " + buildProduct)
+}
+
+println("=============== 1 taskNames = " + project.gradle.startParameter.taskNames + ", isGlobal = " + isGlobal)
+
 buildscript {
-    ext.kotlin_version = "1.5.0"
+    ext.isGlobal = false
+    def taskNames = project.gradle.startParameter.taskNames
+    println("=============== 2-1 taskNames = " + taskNames)
+    if (taskNames.size() > 0) {
+        def taskName = taskNames.get(0)
+        ext.isGlobal = taskName.toLowerCase().contains("global")
+        println("=============== 2-2 taskNames = " + taskName + " isGlobal: " + isGlobal)
+    }
+
+    ext.kotlin_version = "1.4.32"
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.1"
+        classpath "com.android.tools.build:gradle:4.2.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        println("=============== 2-3" + " isGlobal: " + isGlobal)
+        classpath "io.github.didi.dokit:dokitx-plugin:${DOKIT_VERSION}"
     }
 }
 

@@ -1,9 +1,9 @@
 package com.lostoy.android.productflavor.sample
 
-import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 
-class SampleApplication: Application() {
+class SampleApplication: MultiDexApplication() {
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
