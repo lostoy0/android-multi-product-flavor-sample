@@ -23,17 +23,35 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "product"
+
+    productFlavors {
+        official {
+            dimension "product"
+            versionNameSuffix "-official"
+        }
+        lite {
+            dimension "product"
+            versionNameSuffix "-lite"
+        }
+        global {
+            dimension "product"
+            versionNameSuffix "-global"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 }
 
 dependencies {
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
