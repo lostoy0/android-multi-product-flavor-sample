@@ -27,6 +27,11 @@ buildscript {
         println("=============== 2-2 taskNames = " + taskName + " isGlobal: " + isGlobal)
     }
 
+    // 两种方式都可以
+//    apply from: rootProject.file("config.gradle")
+    apply from: "config.gradle"
+    println("=============== 2-2-1 isOfficial: " + isOfficial())
+
     ext.kotlin_version = "1.4.32"
     repositories {
         google()

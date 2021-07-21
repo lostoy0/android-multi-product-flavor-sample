@@ -1,0 +1,13 @@
+ext {
+    isOfficial = {
+        def _isOfficial = false
+        def taskNames = project.gradle.startParameter.taskNames
+        println("=============== config.gradle 1 taskNames = " + taskNames)
+        if (taskNames.size() > 0) {
+            def taskName = taskNames.get(0)
+            _isOfficial = taskName.toLowerCase().contains("official")
+            println("=============== config.gradle 2 taskNames = " + taskName + " isGlobal: " + !_isOfficial)
+        }
+        return _isOfficial
+    }
+}
